@@ -1925,6 +1925,18 @@ void BackendD3D::_drawBitmap(const RenderingPayload& p, const ShapedRow* row, u1
 
 void BackendD3D::_drawCursorBackground(const RenderingPayload& p)
 {
+    if (_cursorPosition.left != _lastCursorPosition.left)
+    {
+        _lastCursorPosition = {
+            _cursorPosition.left,
+            _cursorPosition.top,
+            _cursorPosition.right,
+            _cursorPosition.bottom
+        }
+    }
+
+
+
     _cursorRects.clear();
 
     if (p.cursorRect.empty())
@@ -2318,8 +2330,12 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
                 static_cast<f32>(_viewportCellCount.y * p.s->font->cellSize.y),
             },
             .cursorPos = {
-                static_cast<f32>(p.s->font->cellSize.x * p.cursorRect.left),
-                static_cast<f32>(p.s->font->cellSize.y * p.cursorRect.bottom),
+                static_cast<f32>(_cursorPosition.left),
+                static_cast<f32>(_cursorPosition.bottom),
+            },
+            .lastCursorPos = {
+                static_cast<f32>(_lastCursorPosition.left),
+                static_cast<f32>(_lastCursorPosition.bottom),
             },
             .background = colorFromU32Premultiply<f32x4>(p.s->misc->backgroundColor),
         };

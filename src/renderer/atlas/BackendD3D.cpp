@@ -1932,7 +1932,7 @@ void BackendD3D::_drawCursorBackground(const RenderingPayload& p)
             _cursorPosition.top,
             _cursorPosition.right,
             _cursorPosition.bottom
-        }
+        };
     }
 
 

@@ -36,7 +36,7 @@ jobs:
       run: |
         choco install visualstudio2022-workload-nativedesktop
         choco install visualstudio2022-workload-universal
-        choco install visualstudio2022-component-vc143
+        choco install visualstudio2022-workload-vctools
 
     - name: Install .NET Framework Targeting Pack
       run: choco install netfx-4.8-devpack

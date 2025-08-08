@@ -42,6 +42,7 @@ jobs:
         choco install visualstudio2022-workload-universal
         choco install visualstudio2022-workload-vctools
         choco install visualstudio2022buildtools
+        choco install dotnet-sdk --version 8.0.302
 
 
     - name: Install .NET Framework Targeting Pack

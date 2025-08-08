@@ -26,21 +26,24 @@ jobs:
         iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 
-    - name: Install Windows 11 SDK
-      run: choco install windows-sdk-11-version-22H2-all
+    # - name: Install Windows 11 SDK
+    #   run: choco install windows-sdk-11-version-22H2-all
 
+    - name: Install Windows 10 SDK
+      run: choco install choco install windows-sdk-10.0
 
 
     - name: Install Visual Studio 2022
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
+        # choco install visualstudio2022buildtools
     - name: Install VS Workloads and Components
       run: |
         choco install visualstudio2022-workload-nativedesktop
         choco install visualstudio2022-workload-universal
         choco install visualstudio2022-workload-vctools
-        choco install visualstudio2022buildtools
         choco install dotnet-sdk --version 8.0.302
+        choco install dotnetcore-sdk
 
 
     - name: Install .NET Framework Targeting Pack

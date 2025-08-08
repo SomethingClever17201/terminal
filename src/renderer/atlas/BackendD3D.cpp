@@ -1108,6 +1108,7 @@ void BackendD3D::_drawText(RenderingPayload& p)
     til::CoordType dirtyTop = til::CoordTypeMax;
     til::CoordType dirtyBottom = til::CoordTypeMin;
 
+    //idea, set x here, pass through to whartever, provided we can set it
     u16 y = 0;
     for (const auto row : p.rows)
     {
@@ -1932,9 +1933,9 @@ void BackendD3D::_drawCursorBackground(const RenderingPayload& p)
     }
 
     _cursorPosition = {
-        p.s->font->cellSize.x * p.cursorRect.left,
+        p.s->font->cellSize.x * p.cursorRect.left,//left of the rect//holy shit this is where it would be forever
         p.s->font->cellSize.y * p.cursorRect.top,
-        p.s->font->cellSize.x * p.cursorRect.right,
+        p.s->font->cellSize.x * p.cursorRect.right,// right of the rect
         p.s->font->cellSize.y * p.cursorRect.bottom,
     };
 
@@ -2306,6 +2307,9 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
         const auto now = queryPerfCount();
         const auto time = static_cast<int>(now % _customShaderPerfTickMod) * _customShaderSecsPerPerfTick;
 
+        //leftmost point of rect
+        // p.s->font->cellSize.x * p.cursorRect.left
+        //looking for bottom most point(?)
         const CustomConstBuffer data{
             .time = time,
             .scale = static_cast<f32>(p.s->font->dpi) / static_cast<f32>(USER_DEFAULT_SCREEN_DPI),

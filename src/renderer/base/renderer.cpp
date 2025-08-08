@@ -1150,6 +1150,7 @@ void Renderer::_updateCursorInfo()
     const auto cursorColor = _renderSettings.GetColorTableEntry(TextColor::CURSOR_COLOR);
     const auto useColor = cursorColor != INVALID_COLOR;
 
+    //if we can get this to where we need it to go, victory
     _currentCursorOptions.coordCursor = coordCursor;
     _currentCursorOptions.viewportLeft = viewport.left;
     _currentCursorOptions.lineRendition = lineRendition;

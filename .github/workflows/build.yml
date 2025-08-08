@@ -31,8 +31,6 @@ jobs:
 
     - name: Install Visual Studio 2022
       uses: microsoft/setup-msbuild@v1.0.2
-      with:
-        vs-version: '2022'
 
     - name: Install VS Workloads and Components
       run: |

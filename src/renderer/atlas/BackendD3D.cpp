@@ -2317,6 +2317,10 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
                 static_cast<f32>(_viewportCellCount.x * p.s->font->cellSize.x),
                 static_cast<f32>(_viewportCellCount.y * p.s->font->cellSize.y),
             },
+            .cursorPos = {
+                static_cast<f32>(p.s->font->cellSize.x * p.cursorRect.left),
+                static_cast<f32>(p.s->font->cellSize.y * p.cursorRect.bottom),
+            },
             .background = colorFromU32Premultiply<f32x4>(p.s->misc->backgroundColor),
         };
 

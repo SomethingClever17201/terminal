@@ -25,10 +25,6 @@ jobs:
         [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
         iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-    - name: Install PowerShell 7
-      uses: PSModule/install-powershell@v1
-      with:
-        version: '7.x'
 
     - name: Install Windows 11 SDK
       run: choco install windows-sdk-11-version-22621-0

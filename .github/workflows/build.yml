@@ -54,6 +54,9 @@ jobs:
     #
     # - name: Install .NET Framework Targeting Pack
 
+    - name: Install winget
+      uses: Cyberboss/install-winget@v1
+
     - name: Sending it
       shell: pwsh
       run: |

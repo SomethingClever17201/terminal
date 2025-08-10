@@ -56,6 +56,23 @@ jobs:
 
     # - name: Install winget
     #   uses: Cyberboss/install-winget@v1
+    - name: Check Winget Installation and Path
+      shell: powershell
+      run: |
+        Get-Command winget -ErrorAction SilentlyContinue | Out-Null
+        if ($LastExitCode -ne 0) {
+            Write-Host "Winget command not found. Attempting to locate winget.exe and add to PATH if necessary."
+            $wingetPath = Get-ChildItem -Path "C:\Program Files\WindowsApps\" -Filter "Microsoft.DesktopAppInstaller_*" -Recurse | Where-Object {$_.Name -eq "winget.exe"} | Select-Object -ExpandProperty DirectoryName -First 1
+            if ($wingetPath) {
+                Write-Host "Found winget.exe at: $wingetPath"
+                $env:Path += ";$wingetPath"
+                Write-Host "Added $wingetPath to PATH."
+            } else {
+                Write-Host "Winget.exe not found on the runner. Consider installing/updating App Installer."
+            }
+        } else {
+            Write-Host "Winget command found."
+        }
 
     - name: Sending it
       shell: pwsh

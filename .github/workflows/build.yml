@@ -60,7 +60,7 @@ jobs:
     - name: Sending it
       shell: pwsh
       run: |
-        winget configure  --accept-package-agreements .config\configuration.winget
+        winget configure  --accept-configuration-agreements .config\configuration.winget
 
     - name: Build with PowerShell
       shell: pwsh

@@ -19,65 +19,13 @@ jobs:
     - name: Set up Developer Mode
       run: Start-Process powershell -ArgumentList 'Set-ExecutionPolicy RemoteSigned -Scope Process -Force; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart' -Verb RunAs
 
-    # - name: Install Chocolatey
-    #   run: |
-    #     Set-ExecutionPolicy Bypass -Scope Process -Force;
-    #     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-    #     iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-
-    # - name: Install Windows 11 SDK
-    #   run: choco install windows-sdk-11-version-22H2-all
-
-    # - name: Windows SDK Install
-    #   uses: ChristopheLav/windows-sdk-install@v1.0.3
-    #   with:
-    #     version-sdk: 26100
-    #     features: 'OptionId.UWPCPP,OptionId.DesktopCPParm64'
-
-    # - name: Install Windows 10 SDK
-    #   run: choco install choco install windows-sdk-10.0
-
-
-    # - name: Install Visual Studio 2022
-    #   uses: microsoft/setup-msbuild@v2
-
-        # choco install visualstudio2022buildtools
-    # - name: Install VS Workloads and Components
-    #   run: |
-    #     choco install visualstudio2022-workload-nativedesktop
-    #     choco install visualstudio2022-workload-universal
-    #     choco install visualstudio2022-workload-vctools
-    #     choco install dotnet-sdk --version 8.0.302
-    #     choco install dotnetcore-sdk
-    #
-    #
-    # - name: Install .NET Framework Targeting Pack
-
-    # - name: Install winget
-    #   uses: Cyberboss/install-winget@v1
-    - name: Check Winget Installation and Path
-      shell: powershell
-      run: |
-        Get-Command winget -ErrorAction SilentlyContinue | Out-Null
-        if ($LastExitCode -ne 0) {
-            Write-Host "Winget command not found. Attempting to locate winget.exe and add to PATH if necessary."
-            $wingetPath = Get-ChildItem -Path "C:\Program Files\WindowsApps\" -Filter "Microsoft.DesktopAppInstaller_*" -Recurse | Where-Object {$_.Name -eq "winget.exe"} | Select-Object -ExpandProperty DirectoryName -First 1
-            if ($wingetPath) {
-                Write-Host "Found winget.exe at: $wingetPath"
-                $env:Path += ";$wingetPath"
-                Write-Host "Added $wingetPath to PATH."
-            } else {
-                Write-Host "Winget.exe not found on the runner. Consider installing/updating App Installer."
-            }
-        } else {
-            Write-Host "Winget command found."
-        }
-
-    - name: Sending it
+    - name: Make work
       shell: pwsh
       run: |
-        winget configure  --accept-configuration-agreements .config\configuration.winget
+        winget configure export -f .config\configuration.winget -o out.json
+        Get-Content out.json
+        winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
+
 
     - name: Build with PowerShell
       shell: pwsh

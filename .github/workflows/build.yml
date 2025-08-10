@@ -22,8 +22,6 @@ jobs:
     - name: Make work
       shell: pwsh
       run: |
-        winget configure export -f .config\configuration.winget -o out.json
-        Get-Content out.json
         winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
 
 

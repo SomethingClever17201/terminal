@@ -20,8 +20,9 @@ jobs:
       run: Start-Process powershell -ArgumentList 'Set-ExecutionPolicy RemoteSigned -Scope Process -Force; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart' -Verb RunAs
 
     - name: Make work
-      shell: powershell
+      shell: pwsh
       run: |
+        winget search --id vsPackage 
         winget configure show -f .config\configuration.winget
         winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
 

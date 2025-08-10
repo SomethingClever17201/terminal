@@ -19,21 +19,21 @@ jobs:
     - name: Set up Developer Mode
       run: Start-Process powershell -ArgumentList 'Set-ExecutionPolicy RemoteSigned -Scope Process -Force; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart' -Verb RunAs
 
-    - name: Install Chocolatey
-      run: |
-        Set-ExecutionPolicy Bypass -Scope Process -Force;
-        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    # - name: Install Chocolatey
+    #   run: |
+    #     Set-ExecutionPolicy Bypass -Scope Process -Force;
+    #     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+    #     iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 
     # - name: Install Windows 11 SDK
     #   run: choco install windows-sdk-11-version-22H2-all
 
-    - name: Windows SDK Install
-      uses: ChristopheLav/windows-sdk-install@v1.0.3
-      with:
-        version-sdk: 26100
-        features: 'OptionId.UWPCPP,OptionId.DesktopCPParm64'
+    # - name: Windows SDK Install
+    #   uses: ChristopheLav/windows-sdk-install@v1.0.3
+    #   with:
+    #     version-sdk: 26100
+    #     features: 'OptionId.UWPCPP,OptionId.DesktopCPParm64'
 
     # - name: Install Windows 10 SDK
     #   run: choco install choco install windows-sdk-10.0
@@ -43,17 +43,21 @@ jobs:
     #   uses: microsoft/setup-msbuild@v2
 
         # choco install visualstudio2022buildtools
-    - name: Install VS Workloads and Components
+    # - name: Install VS Workloads and Components
+    #   run: |
+    #     choco install visualstudio2022-workload-nativedesktop
+    #     choco install visualstudio2022-workload-universal
+    #     choco install visualstudio2022-workload-vctools
+    #     choco install dotnet-sdk --version 8.0.302
+    #     choco install dotnetcore-sdk
+    #
+    #
+    # - name: Install .NET Framework Targeting Pack
+
+    - name: Sending it
+      shell: pwsh
       run: |
-        choco install visualstudio2022-workload-nativedesktop
-        choco install visualstudio2022-workload-universal
-        choco install visualstudio2022-workload-vctools
-        choco install dotnet-sdk --version 8.0.302
-        choco install dotnetcore-sdk
-
-
-    - name: Install .NET Framework Targeting Pack
-      run: choco install netfx-4.8-devpack
+        winget configure .config\configuration.winget
 
     - name: Build with PowerShell
       shell: pwsh

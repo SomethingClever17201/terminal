@@ -22,6 +22,7 @@ jobs:
     - name: Make work
       shell: pwsh
       run: |
+        winget configure show
         winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
 
 

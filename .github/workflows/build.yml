@@ -20,10 +20,10 @@ jobs:
       run: Start-Process powershell -ArgumentList 'Set-ExecutionPolicy RemoteSigned -Scope Process -Force; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart' -Verb RunAs
 
 
-    - name: Setup PowerShell
-      uses: actions/setup-powershell@v1
-      with:
-        pwsh-version: 'latest'
+    # - name: Setup PowerShell
+    #   uses: actions/setup-powershell@v1
+    #   with:
+    #     pwsh-version: 'latest'
 
     # - name: Make work
     #   shell: pwsh
@@ -33,7 +33,7 @@ jobs:
     - name: Make work
       shell: pwsh
       run: |
-        winget upgrade --accept-source-agreements --accept-package-agreements --all
+        Repair-WinGetPackageManager -Force -Latest
         winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
 
 

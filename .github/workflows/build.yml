@@ -33,7 +33,8 @@ jobs:
     - name: Make work
       shell: pwsh
       run: |
-        Repair-WinGetPackageManager -Force -Latest
+        Install-Module -Name Microsoft.WinGet.Client
+        Import-Module -Name Microsoft.WinGet.Client
         winget configure  --accept-configuration-agreements  --disable-interactivity -f .config\configuration.winget
 
 

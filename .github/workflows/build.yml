@@ -22,7 +22,7 @@ jobs:
     - name: Make work
       shell: pwsh
       run: |
-            winget upgrade --id Microsoft.PowerShell
+            winget upgrade --accept-source-agreements --accept-package-agreements --id Microsoft.PowerShell
 
     # - name: Make work
     #   shell: pwsh

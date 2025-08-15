@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2025
+    runs-on: win-server
 
     steps:
     - name: Checkout repository
@@ -20,10 +20,6 @@ jobs:
       run: Start-Process powershell -ArgumentList 'Set-ExecutionPolicy RemoteSigned -Scope Process -Force; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart' -Verb RunAs
 
 
-    # - name: Setup PowerShell
-    #   uses: actions/setup-powershell@v1
-    #   with:
-    #     pwsh-version: 'latest'
 
     # - name: Make work
     #   shell: pwsh

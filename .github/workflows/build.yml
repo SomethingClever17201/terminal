@@ -13,25 +13,21 @@ jobs:
     runs-on: win-server
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
 
-    - name: Setup
+    - name: Test
       shell: pwsh
       run: |
-        git submodule update --init --recursive
+        ls
+    # - name: Setup
+    #   shell: pwsh
+    #   run: |
+    #     git submodule update --init --recursive
 
-    - name: Build msixbundle
-      shell: pwsh
-      run: |
-        Import-Module .\tools\OpenConsole.psm1
-        Set-MsBuildDevEnvironment
-        Invoke-OpenConsoleBuild
+    # - name: Build msixbundle
+    #   shell: pwsh
+    #   run: |
+    #     Import-Module .\tools\OpenConsole.psm1
+    #     Set-MsBuildDevEnvironment
+    #     Invoke-OpenConsoleBuild
 
 
-    - name: Build with PowerShell
-      shell: pwsh
-      run: |
-        Import-Module .\tools\OpenConsole.psm1
-        Set-MsBuildDevEnvironment
-        Invoke-OpenConsoleBuild

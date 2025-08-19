@@ -46,3 +46,10 @@ jobs:
       with:
         name: AppManifest
         path: ..\loose\AppxManifest.xml
+
+
+    - name: Attempt Archive Directory
+      uses: actions/upload-artifact@v4
+      with:
+        name: AppManifest
+        path: ..\loose\

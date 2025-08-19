@@ -26,7 +26,7 @@ jobs:
     - name: Build msixbundle
       shell: pwsh
       run: |
-        if ("${{ github.event.inputs.should_run_tests }}") -eq ("false")
+        if ("${{ github.event.inputs.should_run_tests }}" -eq "false")
         {
           Import-Module .\tools\OpenConsole.psm1;
           Set-MsBuildDevEnvironment;

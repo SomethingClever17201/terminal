@@ -14,20 +14,16 @@ jobs:
 
     steps:
 
-    - name: Test
-      shell: pwsh
-      run: |
-        ls
     # - name: Setup
     #   shell: pwsh
     #   run: |
     #     git submodule update --init --recursive
 
-    # - name: Build msixbundle
-    #   shell: pwsh
-    #   run: |
-    #     Import-Module .\tools\OpenConsole.psm1
-    #     Set-MsBuildDevEnvironment
-    #     Invoke-OpenConsoleBuild
+    - name: Build msixbundle
+      shell: pwsh
+      run: |
+        Import-Module .\tools\OpenConsole.psm1
+        Set-MsBuildDevEnvironment
+        Invoke-OpenConsoleBuild
 
 

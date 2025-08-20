@@ -56,6 +56,7 @@ namespace Microsoft::Console::Render::Atlas
             alignas(sizeof(f32x2)) f32x2 resolution;
             alignas(sizeof(f32x2)) f32x2 cursorPos;
             alignas(sizeof(f32x2)) f32x2 lastCursorPos;
+            alignas(sizeof(f32x2)) f32x2 cursorSize;
             alignas(sizeof(f32x4)) f32x4 background;
 #pragma warning(suppress : 4324) // 'CustomConstBuffer': structure was padded due to alignment specifier
         };

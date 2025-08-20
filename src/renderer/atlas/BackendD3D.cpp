@@ -2337,11 +2337,11 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
                 static_cast<f32>(_lastCursorPosition.left),
                 static_cast<f32>(_lastCursorPosition.bottom),
             },
+            .background = colorFromU32Premultiply<f32x4>(p.s->misc->backgroundColor),
             .cursorSize = {
                 static_cast<f32>(p.s->font->cellSize.x),
                 static_cast<f32>(p.s->font->cellSize.y),
             },
-            .background = colorFromU32Premultiply<f32x4>(p.s->misc->backgroundColor),
         };
 
         D3D11_MAPPED_SUBRESOURCE mapped{};

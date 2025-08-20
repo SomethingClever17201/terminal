@@ -60,5 +60,5 @@ jobs:
     - name: Attempt Archive Directory
       uses: actions/upload-artifact@v4
       with:
-        name: AppManifest
+        name: decompiled
         path: .\src\cascadia\CascadiaPackage\AppPackages\loose\

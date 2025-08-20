@@ -1925,7 +1925,7 @@ void BackendD3D::_drawBitmap(const RenderingPayload& p, const ShapedRow* row, u1
 
 void BackendD3D::_drawCursorBackground(const RenderingPayload& p)
 {
-    if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.up != _lastCursorPosition.up)
+    if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.top != _lastCursorPosition.top)
     {
         _lastCursorPosition = {
             _cursorPosition.left,

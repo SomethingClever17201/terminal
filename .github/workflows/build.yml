@@ -7,6 +7,7 @@ on:
         description: 'Skip Build'
         required: true
         default: 'false'
+        type: boolean
   push:
     branches:
       - main

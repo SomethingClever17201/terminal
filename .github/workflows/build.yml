@@ -1,13 +1,15 @@
 name: Build Windows Terminal
 
 on:
+  workflow_call:
+    inputs:
+      skip_build:
+        description: 'Skip Build'
+        required: true
+        default: 'false'
   push:
     branches:
       - main
-    environment:
-      description: 'Skip Build'
-      required: true
-      default: 'false'
   pull_request:
     branches:
       - main
@@ -26,7 +28,7 @@ jobs:
     - name: Build msixbundle
       shell: pwsh
       run: |
-        if ("${{ github.event.inputs.should_run_tests }}" -eq "false")
+        if ("${{ inputs.skip_build }}" -eq "false")
         {
           Import-Module .\tools\OpenConsole.psm1;
           Set-MsBuildDevEnvironment;

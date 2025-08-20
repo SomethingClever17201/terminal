@@ -46,6 +46,8 @@ jobs:
     - name: Get AppxManifest
       shell: pwsh
       run : |
+        git fetch
+        git pull
         Import-Module .\tools\OpenConsole.psm1;
         Set-MsBuildDevEnvironment;
         Set-Location -Path src\cascadia\CascadiaPackage\AppPackages\CascadiaPackage_0.0.1.0_x64_Debug_Test;

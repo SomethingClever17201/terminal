@@ -1,7 +1,7 @@
 name: Build Windows Terminal
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       skip_build:
         description: 'Skip Build'

@@ -150,7 +150,8 @@ float4 main(float4 pos : SV_POSITION,float2 uv : TEXCOORD0) : SV_TARGET {
 
     vec4 newColor = vec4(fragColor);
 
-    float progress = blend(clamp((iTime - 1) / DURATION, 0.0, 1));
+    float progress = clamp((iTime - 1) / DURATION, 0.0, 0.5);
+    // float progress = blend(clamp((iTime - 1) / DURATION, 0.0, 1));
     // float progress = blend(clamp((1) / DURATION, 0.0, 1));
     float easedProgress = ease(progress);
 
@@ -159,16 +160,19 @@ float4 main(float4 pos : SV_POSITION,float2 uv : TEXCOORD0) : SV_TARGET {
     vec2 centerCP = getRectangleCenter(previousCursor);
     float lineLength = distance(centerCC, centerCP);
     float distanceToEnd = distance(vu.xy, centerCC);
-    float alphaModifier = distanceToEnd / (lineLength * (easedProgress));
+
+    //something sensible is supposed to go here to make it work with time, buti it's not working for me, so
+    float alphaModifier = distanceToEnd / (lineLength * (1));
 
     if (alphaModifier > 1.0) { // this change fixed it for me.
-      alphaModifier = 1.0;
+      alphaModifier = 1;
     }
 
     float sdfCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
     float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
     newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(sdfTrail, -0.01, 0.001));
+    // newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - sdfTrail);
     newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
     // newColor = mix(newColor, TRAIL_COLOR, sdfTrail);
 

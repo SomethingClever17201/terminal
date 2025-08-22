@@ -2331,11 +2331,11 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
             },
             .cursorPos = {
                 static_cast<f32>(_cursorPosition.left),
-                static_cast<f32>(_cursorPosition.bottom),
+                static_cast<f32>(_cursorPosition.top),
             },
             .lastCursorPos = {
                 static_cast<f32>(_lastCursorPosition.left),
-                static_cast<f32>(_lastCursorPosition.bottom),
+                static_cast<f32>(_lastCursorPosition.top),
             },
             .background = colorFromU32Premultiply<f32x4>(p.s->misc->backgroundColor),
             .cursorSize = {

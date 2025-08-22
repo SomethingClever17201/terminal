@@ -1,3 +1,6 @@
+//Shameless stolen and reworked from  @chardskarth on github
+// original shader link https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
+
 #define vec2  float2
 #define vec3  float3
 #define vec4  float4

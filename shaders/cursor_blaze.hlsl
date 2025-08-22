@@ -93,7 +93,7 @@ float determineStartVertexFactor(vec2 a, vec2 b) {
     return 1.0 - max(condition1, condition2);
 }
 vec2 getRectangleCenter(vec4 rectangle) {
-    return vec2(rectangle.x + (rectangle.z / 2.), rectangle.y - (rectangle.w / 2.));
+    return vec2(rectangle.x + (rectangle.z / 2.), rectangle.y + (rectangle.w / 2.));
 }
 
 static const vec4 TRAIL_COLOR = vec4(1.0, 0.725, 0.161, 1.0); // yellow
@@ -143,10 +143,10 @@ float4 main(float4 pos : SV_POSITION,float2 uv : TEXCOORD0) : SV_TARGET {
     float invertedVertexFactor = 1.0 - vertexFactor;
 
     //Set every vertex of my parellogram
-    vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y - currentCursor.w);
+    vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y + currentCursor.w);
     vec2 v1 = vec2(currentCursor.x + currentCursor.z * invertedVertexFactor, currentCursor.y);
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
-    vec2 v3 = vec2(previousCursor.x + currentCursor.z * vertexFactor, previousCursor.y - previousCursor.w);
+    vec2 v3 = vec2(previousCursor.x + currentCursor.z * vertexFactor, previousCursor.y + previousCursor.w);
 
     vec4 newColor = vec4(fragColor);
 

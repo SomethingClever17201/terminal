@@ -245,6 +245,7 @@ void BackendD3D::Render(RenderingPayload& p)
     //if cursor position updated to new
     if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.top != _lastCursorPosition.top)
     {
+        const auto now = queryPerfCount();
         _cursorTime = static_cast<int>(now % _customShaderPerfTickMod) * _customShaderSecsPerPerfTick;
     }
 

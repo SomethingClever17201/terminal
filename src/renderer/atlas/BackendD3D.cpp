@@ -208,6 +208,7 @@ void BackendD3D::ReleaseResources() noexcept
 
 void BackendD3D::Render(RenderingPayload& p)
 {
+
     if (_generation != p.s.generation())
     {
         _handleSettingsUpdate(p);
@@ -226,11 +227,26 @@ void BackendD3D::Render(RenderingPayload& p)
     }
 #endif
 
+
+    //constantly update previous cursor pos to current pos
+    _lastCursorPosition = {
+        _cursorPosition.left,
+        _cursorPosition.top,
+        _cursorPosition.right,
+        _cursorPosition.bottom
+    };
+
     _drawBackground(p);
     _drawCursorBackground(p);
     _drawText(p);
     _debugShowDirty(p);
     _flushQuads(p);
+
+    //if cursor position updated to new
+    if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.top != _lastCursorPosition.top)
+    {
+        _cursorTime = static_cast<int>(now % _customShaderPerfTickMod) * _customShaderSecsPerPerfTick;
+    }
 
     if (_customPixelShader)
     {
@@ -1925,15 +1941,6 @@ void BackendD3D::_drawBitmap(const RenderingPayload& p, const ShapedRow* row, u1
 
 void BackendD3D::_drawCursorBackground(const RenderingPayload& p)
 {
-    if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.top != _lastCursorPosition.top)
-    {
-        _lastCursorPosition = {
-            _cursorPosition.left,
-            _cursorPosition.top,
-            _cursorPosition.right,
-            _cursorPosition.bottom
-        };
-    }
 
 
 
@@ -2342,6 +2349,7 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
                 static_cast<f32>(p.s->font->cellSize.x),
                 static_cast<f32>(p.s->font->cellSize.y),
             },
+            .cursorTime = _cursorTime
         };
 
         D3D11_MAPPED_SUBRESOURCE mapped{};

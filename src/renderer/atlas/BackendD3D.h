@@ -58,6 +58,7 @@ namespace Microsoft::Console::Render::Atlas
             alignas(sizeof(f32x2)) f32x2 lastCursorPos;
             alignas(sizeof(f32x4)) f32x4 background;
             alignas(sizeof(f32x2)) f32x2 cursorSize;
+            alignas(sizeof(f32)) f32 cursorTime = 0;
             // alignas(sizeof(f32)) f32 paddingOne  = 0;
             // alignas(sizeof(f32)) f32 paddingTwo = 0;
 #pragma warning(suppress : 4324) // 'CustomConstBuffer': structure was padded due to alignment specifier
@@ -334,6 +335,8 @@ namespace Microsoft::Console::Render::Atlas
         // The bounding rect of _cursorRects in pixels.
         til::rect _cursorPosition;
         til::rect _lastCursorPosition;
+
+        float _cursorTime;
 
         f32 _curlyLineHalfHeight = 0.0f;
         FontDecorationPosition _curlyUnderline;

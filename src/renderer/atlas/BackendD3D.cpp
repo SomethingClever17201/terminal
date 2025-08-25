@@ -242,12 +242,6 @@ void BackendD3D::Render(RenderingPayload& p)
     _debugShowDirty(p);
     _flushQuads(p);
 
-    //if cursor position updated to new
-    if (_cursorPosition.left != _lastCursorPosition.left || _cursorPosition.top != _lastCursorPosition.top)
-    {
-        const auto now = queryPerfCount();
-        _cursorTime = static_cast<int>(now % _customShaderPerfTickMod) * _customShaderSecsPerPerfTick;
-    }
 
     if (_customPixelShader)
     {
@@ -2350,7 +2344,6 @@ void BackendD3D::_executeCustomShader(RenderingPayload& p)
                 static_cast<f32>(p.s->font->cellSize.x),
                 static_cast<f32>(p.s->font->cellSize.y),
             },
-            .cursorTime = _cursorTime
         };
 
         D3D11_MAPPED_SUBRESOURCE mapped{};
